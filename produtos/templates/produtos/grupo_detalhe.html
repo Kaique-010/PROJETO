@@ -1,0 +1,18 @@
+<!-- grupo_detalhe.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+      {% endfor %}
+  </div>
+</div>
+  <h1>Detalhes do Grupo - {{ grupo.nome }}</h1>
+  
+  <ul>
+    {% for produto in grupo.produtos_set.all %}
+      <li>{{ produto.nome }} - {{ produto.descricao }}  - {{ produto.peso }} </li>
+    {% empty %}
+      <li>Nenhum produto encontrado neste grupo.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

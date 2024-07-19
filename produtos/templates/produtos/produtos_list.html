@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+.btn-custom {
+    background-color: #faa8a8; 
+    color: #ffffff;
+    border: none;
+    font-family: 'Times New Roman', Times, serif;
+    }
+</style>
+
+<div class="container mt-5">
+    <h1 class="text-center">Catálogo</h1>
+    
+    {% if grupo_selecionado %}
+    <h4 class="text-center">Filtrando por: {{ grupo_selecionado.nome }}</h4>
+    {% endif %}
+    
+    <form id="filterForm" method="GET" action="{% url 'produtos_list' %}" class="mb-4">
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <button class="btn btn-primary custom-btn" onclick="location.href='{% url 'filtrar_produtos' %}'">Todos os Produtos</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row d-flex justify-content-center flex-nowrap custom-font">
+        {% for grupo in grupos %}
+        <div class="col-auto mb-3">
+            <div class="text-center">
+                <!-- Construção manual da URL com o parâmetro de consulta -->
+                <a href="{% url 'grupo_produtos' grupo.id %}?grupo={{ grupo.id }}" class="text-decoration-none">
+                    <h6 class="card-title">{{ grupo.nome }}</h6>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <div id="produtosContainer" class="row">
+            {% for produto in produtos %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        {% if produto.imagem and produto.imagem.url %}
+                        <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}">
+                        {% else %}
+                        <img src="/path/to/default/image.jpg" class="card-img-top" alt="Sem Imagem">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'produto_detalhe' produto.pk %}">{{ produto.nome }}</a>
+                            </h5>
+                            <p class="card-text">{{ produto.descricao }}</p>
+                            <p class="card-text">Família: {{ produto.familia }}</p>
+                            <p class="card-text">Peso: {{ produto.peso }} gr.</p>
+                            <p class="card-text"><strong>Grupo:</strong> {{ produto.grupo }}</p>
+                            <form action={% url 'carrinho:adicionar' produto.id %} method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="quantidade">Quantidade</label>
+                                    <input type="number" name="quantidade" class="form-control" id="quantidade" value="1" min="1">
+                                </div>
+                                <button type="submit" class="btn btn-custom">Adicionar ao Carrinho</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#filterForm').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                type: 'GET',
+                success: function(response) {
+                    $('#produtosContainer').html($(response).find('#produtosContainer').html());
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

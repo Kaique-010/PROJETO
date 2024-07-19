@@ -1,0 +1,142 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meu Carrinho</title>
+    {% bootstrap_css %}
+    <style>
+        body {
+            background: linear-gradient(white, rgb(255, 208, 208));
+            font-family: 'Times New Roman', Times, serif;
+            padding-bottom: 35%;
+        }
+        
+        .card-custom {
+            background-color: #f5e7e7;
+            color: rgb(255, 162, 12);
+            text-decoration-line: underline;
+            border-color: aliceblue;
+            font-size: medium;
+            box-shadow: inset;
+        }
+
+        h1 {
+            color: rgb(255, 162, 12);
+            text-align: center;
+            text-decoration-line: underline;
+        }
+
+        table {
+            text-align: center;
+        }
+
+        th, td {
+            color: rgb(2, 37, 46);
+            text-align: center;
+            vertical-align: middle;
+        }
+        .btn-custom {
+            background-color: #5a88a5;
+            color: white;
+        }
+
+        .btn-custom1 {
+            background-color: #e4a991;
+            color: white;
+        }
+        
+        .btn-custom2 {
+            background-color: #dd9378;
+            color: white;
+        }
+        
+        .btn-custom3 {
+            background-color: #557455;
+            color: white;
+        }
+
+        .btn {
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        .container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><i class="/media/logo.png"> <img src="/media/logo.png" alt="Logo" width="70" height="70" class="d-inline-block align-top"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'Index' %}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Meu Carrinho <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Detalhes Carrinho</h1>
+        <div class="card mb-4 card-custom">
+            <div class="card-body">
+                <h5 class="card-title">Cotação do Ouro:</h5>
+                {% if gold_price_per_gram %}
+                    <p>Preço do ouro por grama: {{ gold_price_per_gram }}</p>
+                {% else %}
+                    <p>Preço do ouro não disponível no momento.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if carrinho and carrinho.itens.exists %}
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Peso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in carrinho.itens.all %}
+                        <tr>
+                            <td>{{ item.produto.nome }}</td>
+                            <td>{{ item.quantidade }}</td>
+                            <td>{{ item.produto.peso }} gr.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Total</th>
+                        <th>{{ total_quantidade }}</th>
+                        <th>{{ total_peso }} gr.</th>
+                    </tr>
+                </tfoot>
+            </table>
+        {% else %}
+            <div class="alert alert-info" role="alert"> 
+                Seu carrinho está vazio.
+            </div>
+        {% endif %}
+
+        <div class="mt-3">
+            <a href="{% url 'carrinho:limpar' %}" class="btn btn-custom">Limpar Carrinho</a>
+            <a href="{% url 'produtos_list' %}" class="btn btn-custom1">Continuar Comprando</a>
+            <button onclick="window.print()" class="btn btn-custom2">Imprimir</button>
+            <a href="{% url 'carrinho:completar_compra' %}" class="btn btn-custom3">Finalizar Compra</a>
+        </div>
+    </div>
+
+    {% bootstrap_javascript %}
+</body>
+</html>

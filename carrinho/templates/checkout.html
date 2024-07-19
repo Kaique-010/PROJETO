@@ -1,0 +1,29 @@
+<!-- checkout.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Checkout</h2>
+    
+    {% if produtos %}
+        <h3>Produtos no Carrinho:</h3>
+        <ul>
+            {% for item in produtos %}
+            <li>{{ item.produto.nome }} - {{ item.quantidade }} unidades</li>
+            {% endfor %}
+        </ul>
+        
+        <p>Total a Pagar: R$ {{ total }}</p>
+        
+        <form method="post" action="{% url 'carrinho:completar_compra' %}">
+            {% csrf_token %}
+            <input type="submit" value="Finalizar Compra" class="btn btn-success">
+        </form>
+    {% else %}
+        <p>O seu carrinho está vazio.</p>
+    {% endif %}
+</div>
+{% endblock %}

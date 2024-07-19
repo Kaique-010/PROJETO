@@ -1,0 +1,106 @@
+<!-- produto_detalhe.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        {% for grupo in grupos %}
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+                <div class="text-center">
+                    <a href="{% url 'grupo_produtos' grupo.id %}" class="text-decoration-none">
+                        <h6 class="card-title">{{ grupo.nome }}</h6>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card">
+        <div class="card-header">
+            <h1>DETALHES: {{ produto.nome }}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }} Imagem" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <p><strong>DESCRIÇÃO:</strong> {{ produto.descricao }}</p>
+                    <p><strong>FAMILIA:</strong> {{ produto.familia }}</p>
+                    <p><strong>COLEÇÃO:</strong> {{ produto.colecao }}</p>
+                    <p><strong>GRUPO:</strong> {{ produto.grupo }}</p>
+                    <p><strong>PESO:</strong> {{ produto.peso }} gramas</p>
+                    <p><strong>TAMANHO:</strong> {{ produto.tamanho }}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <!-- Conteúdo do rodapé, se necessário -->
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(white, rgb(208, 151, 151));
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    h1 {
+        font-weight: bolder;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 18px;
+    }
+    .card {
+        border: 10px solid #ddd;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(255, 226, 226, 0.838);
+        width: 400px;
+        height: 600px;
+        background-color: #fff;
+        color: #333;
+        padding: 10px;
+        margin: 10px;
+    }
+    .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px;
+    }
+    .card:hover {
+        transform: translateY(-10px);
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        background-color: #e9ecef;
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: auto;
+        transition: transform 0.3s ease;
+    }
+    .card:hover .card-img-top {
+        transform: scale(1.5);
+    }
+    .card-body {
+        padding: 10px;
+        text-align: center;
+    }
+    .card-text {
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 2.0rem;
+        color: #555;
+        margin-bottom: 10px;
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+<!-- remover_item.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Remover Item do Carrinho{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Remover Item do Carrinho</h2>
+    <p>Tem certeza que deseja remover o item "{{ item.produto.nome }}" do seu carrinho?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" class="btn btn-danger" value="Confirmar Remoção">
+        <a href="{% url 'carrinho:carrinho_detalhe' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

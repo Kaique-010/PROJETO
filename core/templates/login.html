@@ -1,0 +1,183 @@
+{% load bootstrap4 static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Login e Registrar</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #ffcfcf;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .auth-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 900px;
+        }
+        .auth-box {
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #C2776A;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            margin: 10px;
+        }
+        .input-group-text {
+            background-color: #343a40;
+            border: 1px solid #495057;
+            color: #fff;
+        }
+        .login-icon, .register-icon {
+            cursor: pointer;
+        }
+        .btn-primary {
+            color: #ffffff;
+            background-color: #e6a519;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-control {
+            background-color: #343a40;
+            border: 1px solid #495057;
+            color: #fff;
+        }
+        .form-control:focus {
+            background-color: #495057;
+            color: #fff;
+        }
+        .form-text.text-danger {
+            color: #ffc1c1;
+        }
+        .form-check-label {
+            color: #adb5bd;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+    <div class="auth-box">
+    <div class="login-container">
+        <img src="/media/logo.png" width="85" height="60" class="d-inline-block align-top" alt="">
+        <h2>Please sign in</h2>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <div class="input-group">
+                        {% if field.name == 'username' %}
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                        {% elif field.name == 'password' %}
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                        {% endif %}
+                        {{ field }}
+                        {% if field.name == 'password' %}
+                            <div class="input-group-append">
+                                <span class="input-group-text login-icon" onclick="togglePasswordVisibility('id_password')">
+                                    <i id="password-icon" class="fa fa-eye-slash"></i>
+                                </span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% for error in field.errors %}
+                        <small class="form-text text-danger">{{ error }}</small>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="remember_me">
+                <label class="form-check-label" for="remember_me">Lembre de Mim</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3">Logar</button>
+        </form>
+   
+    </div>
+    {% bootstrap_javascript %}
+    <script>
+        function togglePasswordVisibility(passwordFieldId) {
+            var passwordField = document.getElementById(passwordFieldId);
+            var passwordIcon = document.getElementById('password-icon');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
+            } else {
+                passwordField.type = 'password';
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+
+        <div class="auth-box">
+
+            <h2>Registrar</h2>
+            <form method="post" action="{% url 'registrar' %}">
+                {% csrf_token %}
+                {% for field in register_form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        <div class="input-group">
+                            {% if field.name == 'username' %}
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                            {% elif field.name == 'email' %}
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                </div>
+                            {% elif field.name == 'password' or field.name == 'password_confirm' %}
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                </div>
+                            {% endif %}
+                            {{ field }}
+                        </div>
+                        {% for error in field.errors %}
+                            <small class="form-text text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary btn-block mt-3">Registrar</button>
+
+                <p class="mt-4">&copy; 2024</p>
+            </form>
+        </div>
+    </div>
+    {% bootstrap_javascript %}
+    <script>
+        function togglePasswordVisibility(passwordFieldId) {
+            var passwordField = document.getElementById(passwordFieldId);
+            var passwordIcon = document.getElementById('password-icon');
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                passwordIcon.classList.remove('fa-eye-slash');
+                passwordIcon.classList.add('fa-eye');
+            } else {
+                passwordField.type = 'password';
+                passwordIcon.classList.remove('fa-eye');
+                passwordIcon.classList.add('fa-eye-slash');
+            }
+        }
+    </script>
+</body>
+</html>

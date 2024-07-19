@@ -1,0 +1,105 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar</title>
+    {% bootstrap_css %}
+    <style>
+        body {
+            background-color: #ffcfcf;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .auth-box {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #C2776A;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            margin: 10px;
+        }
+        .input-group-text {
+            background-color: #343a40;
+            border: 1px solid #495057;
+            color: #fff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .form-control {
+            background-color: #343a40;
+            border: 1px solid #495057;
+            color: #fff;
+        }
+        .form-control:focus {
+            background-color: #495057;
+            color: #fff;
+        }
+        .form-text.text-danger {
+            color: #ff0404;
+        }
+        .form-check-label {
+            color: #adb5bd;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .btn-custom{
+            color: #ffffff;
+            background-color: #e6a519;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <img src="/media/logo.png" width="65" height="60" class="d-inline-block align-top" alt="">
+            <h2>Faça seu Cadastro</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id_cnpj">CNPJ</label>
+                    <input type="text" name="cnpj" maxlength="14" required class="form-control" id="id_cnpj">
+                    <small class="form-text text-danger">Este campo é obrigatório.</small>
+                </div>
+                <div class="form-group">
+                    <label for="id_email">E-mail</label>
+                    <input type="email" name="email" maxlength="320" autofocus required class="form-control" id="id_email">
+                    <small class="form-text text-danger">Este campo é obrigatório.</small>
+                </div>
+                <div class="form-group">
+                    <label for="id_password1">Senha</label>
+                    <input type="password" name="password1" autocomplete="new-password" required class="form-control" id="id_password1">
+                    <small class="form-text text-danger">Este campo é obrigatório.</small>
+                </div>
+                <div class="form-group">
+                    <label for="id_password2">Confirme a senha</label>
+                    <input type="password" name="password2" autocomplete="new-password" required class="form-control" id="id_password2">
+                    <small class="form-text text-danger">Este campo é obrigatório.</small>
+                </div>
+
+                <button type="submit" class="btn btn-custom btn-block">Registrar</button>
+            </form>
+        </div>
+    </div>
+    {% bootstrap_javascript %}
+</body>
+</html>

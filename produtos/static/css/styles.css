@@ -1,0 +1,164 @@
+/* Define o estilo do body */
+body {
+    background: linear-gradient(white, rgb(254, 213, 220));
+    font-family: sans-serif;
+    color: #ffffff; /* Cor principal do texto */
+    line-height: 1.6; /* Espaçamento entre linhas melhorado */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove padding padrão */
+}
+
+/* Estilo do texto principal */
+p {
+    font-size: 0.70rem;
+    line-height: 1.0;
+    margin-bottom: 20px;
+}
+
+/* Estilo para links */
+a {
+    color: #060606; /* Cor padrão para links */
+    text-decoration: none; /* Remove sublinhado padrão */
+}
+
+a:hover {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+/* Container flexível para os cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Centraliza os cards */
+    gap: 20px; /* Espaçamento entre os cards */
+    padding: 20px; /* Espaçamento interno */
+}
+
+/* Estilo do card */
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 180px; /* Reduzi o tamanho do card */
+    height: 420px; /* Reduzi o tamanho do card */
+    background: linear-gradient(rgb(255, 255, 255), rgb(255, 250, 250));
+}
+
+/* Efeito de hover no card */
+.card:hover {
+    transform: scale(1.05); /* Aumenta um pouco o tamanho no hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    background-color: #e9ecef; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo da imagem do card */
+.card-img-top {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+/* Efeito de zoom na imagem ao passar o mouse */
+.card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+/* Estilo do corpo do card */
+.card-body {
+    padding: 10px;
+    text-align: center;
+}
+
+/* Estilo do título do card */
+.card-title {
+    font-size: 1.2rem; /* Reduzi o tamanho do título */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Estilo do texto do card */
+.card-text {
+    font-size: 0.9rem; /* Reduzi o tamanho do texto */
+    color: #000000; /* Cor do texto */
+    margin-bottom: 10px; /* Ajustei o espaçamento inferior */
+}
+
+/* Animação de hover */
+.card:hover {
+    animation: hoverAnimation 0.3s forwards;
+}
+
+@keyframes hoverAnimation {
+    from {
+        transform: scale(1.00);
+    }
+    to {
+        transform: scale(1.15);
+    }
+}
+
+
+/* Estilo para a barra de navegação */
+.navbar-custom {
+    background-color: #BF6A61; /* Cor de fundo escura */
+}
+
+.navbar-custom .navbar-brand, 
+.navbar-custom .nav-link {
+    color: #422020; /* Cor para o texto */
+}
+
+.navbar-custom .nav-link.active {
+    color: #b9ffff; /* Cor diferente para o link ativo */
+}
+
+.navbar-custom .btn {
+    margin-left: 25px;
+}
+
+.form-inline .form-control {
+    background-color: #ffecec; /* Cor de fundo do campo de busca */
+    color: #000000; /* Cor do texto do campo de busca */
+    border: 1px solid #000000; /* Borda do campo de busca */
+}
+
+.form-inline .btn-outline-light {
+    border-color: #c4a1c2; /* Borda do botão de busca */
+    color: #000000; /* Cor do texto do botão de busca */
+}
+
+
+
+
+
+
+/* Estilo da fonte customizada */
+.custom-font {
+    font-size: 5px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Custom button styles */
+.custom-btn {
+    background-color: #b75050;
+    border: rosybrown;
+    color: white;
+    padding: 10px 20px;
+    position: relative;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    
+}
+
+.custom-btn:hover {
+    background-color: #6189a0; /* Azul mais escuro ao passar o mouse */
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+
+.custom-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); /* Efeito de foco */
+}
+

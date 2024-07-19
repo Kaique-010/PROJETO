@@ -1,0 +1,108 @@
+<!-- produtos_lista_parcial.html -->
+{% load bootstrap4 static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo Geral</title>
+    {% bootstrap_css %}
+    <style>
+        body {
+            background: linear-gradient(white, rgb(254, 213, 220));
+        }
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 35px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .btn-custom {
+            background-color: #faa8a8;
+            color: #ffffff;
+            border: none;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .card img {
+            max-width: 100%;
+            height: auto;
+        }
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            text-align: left;
+            padding: 10px;
+        }
+        .card-text {
+            margin-bottom: 0.5rem;
+        }
+        .quantity-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .quantity-container label {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Catálogo Geral</h1>
+    <div class="row">
+        {% for produto in produtos %}
+            {% if forloop.counter0|divisibleby:4 %}
+                </div><div class="row">
+            {% endif %}
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="card h-100">
+                    {% if produto.imagem %}
+                        <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}">
+                    {% else %}
+                        <img src="Sem Imagem" class="card-img-top" alt="Sem imagem">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="">{{ produto.nome }}</a>
+                        </h5>
+                        <p class="card-text">Descrição: {{ produto.descricao }}</p>
+                        <p class="card-text">Família: {{ produto.familia }}</p>
+                        <p class="card-text">Peso: {{ produto.peso }} gr.</p>
+                        <p class="card-text">Tamanho: {{ produto.tamanho }}</p>
+                        <p class="card-text">Coleção: {{ produto.colecao }}</p>
+                        <p class="card-text"><strong>Grupo:</strong> {{ produto.grupo }}</p>
+                        <form action="{% url 'carrinho:adicionar' produto.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="quantidade_{{ produto.id }}">Quantidade</label>
+                                <input type="number" name="quantidade" class="form-control" id="quantidade_{{ produto.id }}" value="1" min="1">
+                            </div>
+                            <button type="submit" class="btn btn-custom">Adicionar ao Carrinho</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center">Nenhum produto encontrado.</p>
+        {% endfor %}
+    </div>
+    {% bootstrap_javascript %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq5tv8P8fEX55Cbsn+EGl5fJYYc5i0OJm2b4QomniwUYoXK5/8" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgYfZbB7TVbP9Y50fuFdS4g5cfsXn5f5/7TqtrV1pI4WxAx3Jb4" crossorigin="anonymous"></script>
+</body>
+</html>

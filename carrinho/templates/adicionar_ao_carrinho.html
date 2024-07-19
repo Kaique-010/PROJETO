@@ -1,0 +1,21 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Adicionar ao Carrinho</title>
+    {% bootstrap_css %}
+</head>
+<body>
+    <div class="container">
+        <h1>Adicionar ao Carrinho</h1>
+        <form action="{% url 'adicionar_ao_carrinho' produto_id=produto.id %}" method="post">
+            {% csrf_token %}
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" min="1" value="1">
+            <button type="submit" class="btn btn-primary">Adicionar ao Carrinho</button>
+        </form>
+    </div>
+    {% bootstrap_javascript %}
+</body>
+</html>

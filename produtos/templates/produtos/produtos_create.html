@@ -1,0 +1,26 @@
+<!-- produtos_create.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+      {% for grupo in grupos %}
+          <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+              <div class="text-center">
+                  <a href="{% url 'grupo_produtos' grupo.id %}" class="text-decoration-none">
+                      <h6 class="card-title">{{ grupo.nome }}</h6>
+                  </a>
+              </div>
+          </div>
+      {% endfor %}
+  </div>
+</div>
+  <h1>Novo Produto</h1>
+  
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar</button>
+  </form>
+{% endblock %}

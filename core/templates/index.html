@@ -1,0 +1,160 @@
+{% load bootstrap4 static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>ACG - Home</title>
+    {% bootstrap_css %}
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar-custom {
+            background-color: #f8f9fa;
+        }
+        .navbar-custom .nav-link, .navbar-custom .navbar-brand {
+            color: #333;
+        }
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 60vh; /* Altura do carrossel */
+            overflow: hidden;
+        }
+        .carousel-inner {
+            width: 100%;
+            height: 100%;
+        }
+        .carousel-item {
+            height: 100%;
+        }
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Preenche o contêiner mantendo a proporção */
+        }
+        .features-section {
+            padding: 3rem 0;
+            background-color: #f7f7f7;
+        }
+        .feature {
+            text-align: center;
+            padding: 1rem;
+        }
+        .feature i {
+            font-size: 2rem;
+            color: #e6b633;
+            margin-bottom: 1rem;
+        }
+        .footer {
+            background:linear-gradient(#808080, #ffd8ec);
+            color: #fff;
+            padding: 2rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="/media/logo.png" alt="Logo" width="40" height="40" class="d-inline-block align-top"></a>
+            <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto nav-icons">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-box"></i> Meus Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}"><i class="fas fa-th-large"></i> Produtos</a>
+                    </li>
+                </ul>
+                <form method="GET" action="{% url 'produtos_list' %}" class="form-inline mx-auto">
+                    <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Buscar por" aria-label="Buscar por palavra-chave">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light my-2 my-sm-0 custom-login-btn" onclick="location.href='{% url 'login' %}'">Login</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-light my-2 my-sm-0 custom-signup-btn" onclick="location.href=''">Sign-up</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <section id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="/media/jewel1.jpg" alt="Primeiro slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="/media/jewel2.jpg" alt="Segundo slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="/media/jewel3.jpg" alt="Terceiro slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+        </a>
+    </section>
+    
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 feature">
+                    <i class="fas fa-box"></i>
+                    <h3>Gestão de Pedidos</h3>
+                    <p>Gerencie seus pedidos de forma eficiente e rápida.</p>
+                </div>
+                <div class="col-md-4 feature">
+                    <i class="fas fa-th-large"></i>
+                    <h3>Catálogo de Produtos</h3>
+                    <p>Produtos com uma interface intuitiva e amigável.</p>
+                </div>
+                <div class="col-md-4 feature">
+                    <i class="fas fa-user-friends"></i>
+                    <h3>Atendimento ao Cliente</h3>
+                    <p>Oferecemos um suporte excelente para nossos clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 ACG. Todos os direitos reservados.</p>
+            <p><a href="mailto:contato@suaempresa.com">contato@suaempresa.com</a></p>
+            <p><a href="/privacy-policy">Política de Privacidade</a> | <a href="/terms-of-service">Termos de Serviço</a></p>
+        </div>
+    </footer>
+    
+    {% bootstrap_javascript %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

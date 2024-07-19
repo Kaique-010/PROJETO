@@ -1,0 +1,186 @@
+{% load bootstrap4 static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>CATALOGO DE PRODUTOS</title>
+    {% bootstrap_css %}
+    <style>
+body {
+    background: linear-gradient(#09314e, #ffff);
+    font-family: 'Arial', sans-serif; /* Adicione uma fonte padrão */
+}
+
+.card {
+    border-radius: 25px;
+    overflow: hidden;
+    transform: scale(0.78); /* Ajuste o tamanho inicial */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adicione uma sombra sutil */
+    margin-bottom: 20px; /* Adicione espaçamento entre os cards */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Aumenta para 105% do tamanho ao passar o mouse */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+}
+
+.card-img-top {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.1); /* Aumenta para 110% do tamanho ao passar o mouse */
+}
+
+.card-body {
+    background-color: #93badb;
+    color: rgb(207, 235, 225);
+    padding: 20px; /* Aumente o padding para um espaçamento melhor */
+    text-align: center; /* Centralize o texto */
+}
+
+.card-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px; /* Espaçamento inferior */
+}
+
+.card-text {
+    font-size: 1.1rem;
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+.btn-primary {
+    font-size: 1.2rem;
+    padding: 10px 20px; /* Ajuste o padding para melhor aparência */
+    background-color: #256c9e; /* Altere a cor do botão para combinar com o tema */
+    border: none; /* Remova a borda padrão */
+    transition: background-color 0.3s ease; /* Adicione transição para cor de fundo */
+}
+
+.btn-primary:hover {
+    background-color: #1e5477; /* Cor mais escura no hover */
+}
+
+    </style>
+</head>
+<body>
+   
+    <nav class="navbar navbar-expand-lg navbar-light bg-light"  style= background-color:#11ae8f>
+        <a class="navbar-brand" href="#">
+          <img src="media/produtos/Iron.png" width="65" height="45" class="d-inline-block align-top" alt="">
+          Iron
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProdutos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Produtos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownProdutos">
+                        <a class="dropdown-item" href="">Adicionar Produto</a>
+                        <a class="dropdown-item" href="#">Categoria 2</a>
+                        <div class="dropdown-divider"></div>
+                        
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSobre" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Carrinho
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownSobre">
+                        <a class="dropdown-item" href="carrinho/historico">Meu Carrinho</a>
+                        <div class="dropdown-divider"></div>
+
+                    </div>
+                </li>
+                </li>
+                 <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownSobre" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dados Financeiros
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownSobre">
+                    <a class="dropdown-item" href="#">Meus dados Financeiros</a>
+                    <a class="dropdown-item" href="#">Extrato de Dados Financeiros</a>
+                </div>
+            </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownContato" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Contato
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownContato">
+                        <a class="dropdown-item" href="#">Fale Conosco</a>
+                        <a class="dropdown-item" href="#">Suporte</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar navbar-light" style="background-color: #256c9e;">
+        <!-- Navbar content -->
+    </nav>
+    
+    <div class="col-md-3">
+        <div class="sidebar">
+            <h5 style="color: antiquewhite;">Categorias</h5>
+            <ul class="nav flex-column">
+                {% for grupo in grupos %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'grupo_detalhe' %}">{{ grupo.nome }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <style> 
+        h1{ color: rgb(176, 130, 31);}
+    </style>
+    <center> <h1>CATALOGO DE PRODUTOS</h1></center>
+    <div class="container">
+        <div class="row">
+            {% for produto in produtos %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        {% if produto.imagem %}
+                            <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}">
+                        {% else %}
+                            <img src="{% static 'images/no-image.png' %}" class="card-img-top" alt="Sem imagem disponível">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ produto.nome }}</h5>
+                            <p class="card-text">Coleção: {{ produto.colecao }}</p>
+                            <p class="card-text">Tamanho: {{ produto.tamanho }}</p>
+                            <p class="card-text">Peso: {{ produto.peso }}</p>
+                            <form action="{% url 'carrinho:adicionar' produto.id %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="quantidade">Quantidade</label>
+        <input type="number" name="quantidade" class="form-control" id="quantidade" value="1" min="1">
+    </div>
+    <button type="submit" class="btn btn-primary">Adicionar ao Carrinho</button>
+</form>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                    </div><div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Include jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq5tv8P8fEX55Cbsn+EGl5fJYYc5i0OJm2b4QomniwUYoXK5/8" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgYfZbB7TVbP9Y50fuFdS4g5cfsXn5f5/7TqtrV1pI4WxAx3Jb4" crossorigin="anonymous"></script>
+    {% bootstrap_javascript %}
+</body>
+</html>
