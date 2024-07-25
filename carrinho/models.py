@@ -1,5 +1,3 @@
-# carrinho/models.py
-
 from django.db import models
 from conecta import settings
 from produtos.models import Produtos
@@ -13,11 +11,34 @@ class Base(models.Model):
     class Meta:
         abstract = True
 
+class FormasRecebimento(models.Model):
+    DINHEIRO = 'dinheiro'
+    PIX = 'pix'
+    DEPOSITO = 'deposito'
+    DEBITO = 'cartao_debito'
+    CREDITO = 'cartao_credito'
+    BOLETO = 'boleto'
+
+    FORMAS_CHOICES = [
+        (DINHEIRO, 'Dinheiro'),
+        (PIX, 'Pix'),
+        (DEPOSITO, 'Deposito'),
+        (DEBITO, 'Cartão de Débito'),
+        (CREDITO, 'Cartão de Crédito'),
+        (BOLETO, 'Boleto')
+    ]
+
+    forma = models.CharField(max_length=20, choices=FORMAS_CHOICES)
+
+    def __str__(self):
+        return self.get_forma_display()
+
 class Carrinho(Base):
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     finalizado = models.BooleanField(default=False)
     criado_em = models.DateTimeField(auto_now_add=True)
     atualizado_em = models.DateTimeField(auto_now=True)
+    forma_recebimento = models.CharField(max_length=20, choices=FormasRecebimento.FORMAS_CHOICES, null=True, blank=True)
 
     def __str__(self):
         return f'Carrinho do {self.usuario.username} - {"Finalizado" if self.finalizado else "Aberto"}'
@@ -44,6 +65,7 @@ class Compra(Base):
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     data_compra = models.DateTimeField(auto_now_add=True)
     peso_total = models.DecimalField(max_digits=10, decimal_places=2)
+    forma_recebimento = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f'Compra de {self.usuario.username} em {self.data_compra}'
@@ -67,4 +89,3 @@ class ItemCompra(Base):
     @property
     def peso_total(self):
         return self.produto.peso * self.quantidade
-    

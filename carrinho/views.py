@@ -13,7 +13,6 @@ from django.core.mail import send_mail
 import requests
 from decimal import Decimal, ROUND_HALF_UP
 
-
 logger = logging.getLogger(__name__)
 
 @login_required
@@ -112,11 +111,9 @@ def checkout(request):
     }
     return render(request, 'carrinho/checkout.html', contexto)
 
-
 @login_required
 def completar_compra(request):
     if request.method == 'POST':
-        # Obter o carrinho do usuário logado que não está finalizado
         try:
             carrinho = get_object_or_404(Carrinho, usuario=request.user, finalizado=False)
         except Carrinho.DoesNotExist:
@@ -125,32 +122,33 @@ def completar_compra(request):
         total_quantidade = Decimal('0')
         total_peso = Decimal('0')
 
-        # Calcular total_quantidade e total_peso antes de criar a compra
         for item in carrinho.itens.all():
             total_quantidade += Decimal(item.quantidade)
             total_peso += Decimal(item.produto.peso) * Decimal(item.quantidade)
 
-        # Criar uma nova compra com o peso_total calculado
+        forma_recebimento = request.POST.get('forma_recebimento')
+
+        # Verifique se a forma de recebimento está sendo capturada corretamente
+        if not forma_recebimento:
+            return HttpResponse("Forma de recebimento não fornecida.", status=400)
+
+        # Cria a compra e salva a forma de recebimento
         compra = Compra.objects.create(
             usuario=request.user,
-            peso_total=total_peso
+            peso_total=total_peso,
+            forma_recebimento=forma_recebimento  # Salvar forma de recebimento
         )
 
+        carrinho.finalizado = True
+        carrinho.save()
+
         for item in carrinho.itens.all():
-            # Criar itens da compra
             ItemCompra.objects.create(
                 compra=compra,
                 produto=item.produto,
                 quantidade=item.quantidade
             )
 
-        # Finalizar o carrinho
-        carrinho.finalizado = True
-        carrinho.save()
-
-
-
-        # Enviar email de confirmação
         nome = request.POST.get('nome')
         email = request.POST.get('email')
 
@@ -167,6 +165,7 @@ def completar_compra(request):
                     f"Email: {email}\n\n"
                     f"Total de Itens: {total_quantidade}\n"
                     f"Peso Total: {total_peso} gr\n\n"
+                    f"Forma de Recebimento: {compra.forma_recebimento}\n\n"
                     f"Produtos Comprados:\n{produtos_comprados}")
 
         try:
@@ -174,7 +173,6 @@ def completar_compra(request):
         except Exception as e:
             return HttpResponse(f'Erro ao enviar e-mail: {e}')
 
-        # Renderizar a página de confirmação de compra
         return render(request, 'carrinho/compra_concluida.html', {
             'total_quantidade': total_quantidade,
             'total_peso': total_peso,
@@ -189,12 +187,18 @@ def limpar_carrinho(request):
     carrinho.itens.all().delete()
     return redirect("carrinho:carrinho_detalhe")
 
-
 @login_required
 def historico_compras(request):
-    historico = Carrinho.objects.filter(usuario=request.user, finalizado=True)
-    context = {
-        'historico': historico
-    }
-    return render(request, 'historico_compras.html', context)
-
+    historico = Compra.objects.filter(usuario=request.user).prefetch_related('itens__produto')
+    compras_com_forma = []
+    
+    for compra in historico:
+        compras_com_forma.append({
+            'id': compra.id,
+            'criado_em': compra.data_compra,
+            'peso_total': compra.calcular_peso_total(),
+            'forma_recebimento': compra.forma_recebimento,  # Acesse o atributo diretamente
+            'itens': compra.itens.all()
+        })
+    
+    return render(request, 'historico_compras.html', {'historico': compras_com_forma})

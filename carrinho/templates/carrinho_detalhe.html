@@ -98,43 +98,58 @@
         </div>
 
         {% if carrinho and carrinho.itens.exists %}
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                        <th>Peso</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for item in carrinho.itens.all %}
+            <form method="POST" action="{% url 'carrinho:completar_compra' %}">
+                {% csrf_token %}
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <td>{{ item.produto.nome }}</td>
-                            <td>{{ item.quantidade }}</td>
-                            <td>{{ item.produto.peso }} gr.</td>
+                            <th>Produto</th>
+                            <th>Quantidade</th>
+                            <th>Peso</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Total</th>
-                        <th>{{ total_quantidade }}</th>
-                        <th>{{ total_peso }} gr.</th>
-                    </tr>
-                </tfoot>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for item in carrinho.itens.all %}
+                            <tr>
+                                <td>{{ item.produto.nome }}</td>
+                                <td>{{ item.quantidade }}</td>
+                                <td>{{ item.produto.peso }} gr.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Total</th>
+                            <th>{{ total_quantidade }}</th>
+                            <th>{{ total_peso }} gr.</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div class="form-group">
+                    <label for="forma_recebimento">Forma de Recebimento:</label>
+                    <select id="forma_recebimento" name="forma_recebimento" class="form-control">
+                        <option value="dinheiro">Dinheiro</option>
+                        <option value="pix">Pix</option>
+                        <option value="deposito">Deposito</option>
+                        <option value="cartao_debito">Cartão de Débito</option>
+                        <option value="cartao_credito">Cartão de Crédito</option>
+                        <option value="boleto">Boleto</option>
+                    </select>
+                </div>
+
+                <div class="mt-3">
+                    <a href="{% url 'carrinho:limpar' %}" class="btn btn-custom">Limpar Carrinho</a>
+                    <a href="{% url 'produtos_list' %}" class="btn btn-custom1">Continuar Comprando</a>
+                    <button onclick="window.print()" class="btn btn-custom2">Imprimir</button>
+                    <a href="{% url 'carrinho:completar_compra' %}" class="btn btn-custom3">Finalizar Compra</a>
+                </div>
+            </form>
         {% else %}
             <div class="alert alert-info" role="alert"> 
                 Seu carrinho está vazio.
             </div>
         {% endif %}
-
-        <div class="mt-3">
-            <a href="{% url 'carrinho:limpar' %}" class="btn btn-custom">Limpar Carrinho</a>
-            <a href="{% url 'produtos_list' %}" class="btn btn-custom1">Continuar Comprando</a>
-            <button onclick="window.print()" class="btn btn-custom2">Imprimir</button>
-            <a href="{% url 'carrinho:completar_compra' %}" class="btn btn-custom3">Finalizar Compra</a>
-        </div>
     </div>
 
     {% bootstrap_javascript %}
