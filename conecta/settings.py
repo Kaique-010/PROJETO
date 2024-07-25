@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'produtos',
     'crispy_forms',
     'carrinho',
+    'representantes',
+    'formasrecebimento',
 ]
 
 MIDDLEWARE = [
@@ -111,7 +113,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = 'media/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'produtos/static'),  # Adicione este caminho se ainda não estiver lá
+]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

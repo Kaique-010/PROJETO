@@ -1,13 +1,11 @@
-<!-- carrinho/templates/carrinho/compra_concluida.html -->
 {% load bootstrap4 static %}
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ACG- Compra Concluída</title>
+    <title>ACG - Compra Concluída</title>
     {% bootstrap_css %}
     <style>
         body {
-            body {
             background: linear-gradient(white, rgb(211, 196, 196));
             font-family: 'Arial', sans-serif;
             padding-inline-start: 5%;
@@ -22,6 +20,9 @@
         }
         h1 {
             color: #28a745;
+        }
+        h3 {
+            color: #28a745;    
         }
         .btn-custom {
             background-color: #28a745;
@@ -41,9 +42,25 @@
         <p>Pedido processado com sucesso!</p>
         <p>Total de Itens: {{ total_quantidade }}</p>
         <p>Peso Total: {{ total_peso }} gramas</p>
-        <a href="{% url 'produtos_list' %}" class="btn btn-custom mt-3">Voltar para Produtos</a>
+        <br>
+        <br>
+        <br>
+        <center><h3>Finalizar Compra</h3></center>
+        <form method="POST" action="{% url 'carrinho:completar_compra' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar Pedido</button>
+        </form>
         <a href="/index/" class="btn btn-custom2 mt-3">Voltar para Home</a>
     </div>
+    
     {% bootstrap_javascript %}
 </body>
 </html>

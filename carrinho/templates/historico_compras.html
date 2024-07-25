@@ -1,7 +1,9 @@
 {% load bootstrap4 static %}
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico de Compras</title>
     {% bootstrap_css %}
     <style>
@@ -61,11 +63,11 @@
         <ul class="compra-list">
             {% for compra in historico %}
                 <li>
-                    Compra: {{ compra.id }}, Data: {{ compra.criado_em }}, Peso Total: {{ compra.peso_total }} gramas, Forma de Recebimento: {{ compra.forma_recebimento }}
+                    Compra: {{ compra.id }}, Data: {{ compra.criado_em }}, Peso Total: {{ compra.peso_total }} gramas,
                     <button type="button" class="btn btn-info btn-sm btn-detalhes" onclick="mostrarDetalhes({{ compra.id }})">Ver Detalhes</button>
                     <div id="detalhes-compra-{{ compra.id }}" style="display:none;">
                         <ul class="compra-details">
-                            {% for item in compra.itens %}
+                            {% for item in compra.itens.all %}
                                 <li>Produto: {{ item.produto.nome }}, Quantidade: {{ item.quantidade }}, Peso: {{ item.produto.peso }} gramas</li>
                             {% endfor %}
                         </ul>

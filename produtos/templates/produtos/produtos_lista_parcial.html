@@ -59,9 +59,10 @@
         .quantity-container label {
             margin-right: 10px;
         }
-    </style>
-</head>
-<body>
+            
+            </style>
+        </head>
+        <body>
     <h1>Catálogo Geral</h1>
     <div class="row">
         {% for produto in produtos %}
@@ -105,4 +106,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq5tv8P8fEX55Cbsn+EGl5fJYYc5i0OJm2b4QomniwUYoXK5/8" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgYfZbB7TVbP9Y50fuFdS4g5cfsXn5f5/7TqtrV1pI4WxAx3Jb4" crossorigin="anonymous"></script>
 </body>
+{% include 'partials/footer.html' %}
 </html>
