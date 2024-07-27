@@ -1,12 +1,75 @@
 /* Define o estilo do body */
 body {
-    background: linear-gradient(white, rgb(254, 213, 220));
-    font-family: sans-serif;
-    color: #ffffff; /* Cor principal do texto */
-    line-height: 1.6; /* Espaçamento entre linhas melhorado */
-    margin: 0; /* Remove margens padrão */
-    padding: 0; /* Remove padding padrão */
+    
+    font-family: 'Times New Roman', Times, serif;
+    color: #343a40; /* Cor principal do texto */
+    line-height: 1.6; /* EspaÃ§amento entre linhas melhorado */
+    margin: 0; /* Remove margens padrÃ£o */
+    padding: 0; /* Remove padding padrÃ£o */
 }
+
+/* Estilos para cabeÃ§alhos */
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-top: 5px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #555;
+    margin-top: 15px;
+}
+
+h6{
+    font-size: 20px;
+}
+
+
+/* Estilos para barra de navegaÃ§Ã£o */
+.navbar-custom {
+    background: linear-gradient(to right, #B76359, rgba(249, 210, 180, 0.8));
+    border-bottom: 2px solid #4d002d;
+}
+
+.nav-link {
+    color: #030303 !important;
+}
+
+.nav-link:hover {
+    color: #f6ad40 !important;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 24px;
+}
+
+/* BotÃ£o todos os produtos de estilo para botÃµes personalizados */
+.custom-btn {
+    background-color: #b75050;
+    border: 1px solid rgb(255, 255, 255);
+    color: white;
+    padding: 10px 20px;
+    position: relative;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: #6189a0;
+    transform: scale(1.05);
+}
+
+.custom-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+
+
+
 
 /* Estilo do texto principal */
 p {
@@ -17,39 +80,62 @@ p {
 
 /* Estilo para links */
 a {
-    color: #060606; /* Cor padrão para links */
-    text-decoration: none; /* Remove sublinhado padrão */
+    color: #060606; /* Cor padrÃ£o para links */
+    text-decoration: none; /* Remove sublinhado padrÃ£o */
 }
 
 a:hover {
     text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
 }
 
-/* Container flexível para os cards */
+
+
+
+/* Estilo do card */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(255, 226, 226, 0.838);
+    width: 250px; /* Reduzi o tamanho do card */
+    height: 300px; /* Reduzi o tamanho do card */
+    background-color: #fff;
+    color: #333;
+    padding: 5px;
+    margin: 5px;
+    margin-bottom: 0px;
+}
+
+/* Container flexÃ­vel para os cards */
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around; /* Centraliza os cards */
-    gap: 20px; /* Espaçamento entre os cards */
-    padding: 20px; /* Espaçamento interno */
+    gap: 2px; /* EspaÃ§amento entre os cards */
+    padding: 10px; /* EspaÃ§amento interno */
+    margin-bottom: 0px;
+    margin: 0px;
 }
 
-/* Estilo do card */
-.card {
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    width: 180px; /* Reduzi o tamanho do card */
-    height: 420px; /* Reduzi o tamanho do card */
-    background: linear-gradient(rgb(255, 255, 255), rgb(255, 250, 250));
-}
+
 
 /* Efeito de hover no card */
 .card:hover {
+    transform: translateY(-10px);
     transform: scale(1.05); /* Aumenta um pouco o tamanho no hover */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
     background-color: #e9ecef; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo do tÃ­tulo do card */
+.card-title {
+    font-family: 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 1.2rem; /* Reduzi o tamanho do tÃ­tulo */
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #000000; /* Cor do tÃ­tulo */
 }
 
 /* Estilo da imagem do card */
@@ -66,28 +152,24 @@ a:hover {
 
 /* Estilo do corpo do card */
 .card-body {
-    padding: 10px;
+    padding: 2px;
     text-align: center;
 }
 
-/* Estilo do título do card */
-.card-title {
-    font-size: 1.2rem; /* Reduzi o tamanho do título */
-    font-weight: bold;
-    margin-bottom: 10px;
-}
 
 /* Estilo do texto do card */
 .card-text {
-    font-size: 0.9rem; /* Reduzi o tamanho do texto */
-    color: #000000; /* Cor do texto */
-    margin-bottom: 10px; /* Ajustei o espaçamento inferior */
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 10px; /* Ajustei o espaÃ§amento inferior */
 }
 
-/* Animação de hover */
+/* AnimaÃ§Ã£o de hover */
 .card:hover {
     animation: hoverAnimation 0.3s forwards;
 }
+
 
 @keyframes hoverAnimation {
     from {
@@ -95,27 +177,9 @@ a:hover {
     }
     to {
         transform: scale(1.15);
-    }
-}
+    }}
 
 
-/* Estilo para a barra de navegação */
-.navbar-custom {
-    background-color: #BF6A61; /* Cor de fundo escura */
-}
-
-.navbar-custom .navbar-brand, 
-.navbar-custom .nav-link {
-    color: #422020; /* Cor para o texto */
-}
-
-.navbar-custom .nav-link.active {
-    color: #b9ffff; /* Cor diferente para o link ativo */
-}
-
-.navbar-custom .btn {
-    margin-left: 25px;
-}
 
 .form-inline .form-control {
     background-color: #ffecec; /* Cor de fundo do campo de busca */
@@ -124,14 +188,9 @@ a:hover {
 }
 
 .form-inline .btn-outline-light {
-    border-color: #c4a1c2; /* Borda do botão de busca */
-    color: #000000; /* Cor do texto do botão de busca */
+    border-color: #c4a1c2; /* Borda do botÃ£o de busca */
+    color: #000000; /* Cor do texto do botÃ£o de busca */
 }
-
-
-
-
-
 
 /* Estilo da fonte customizada */
 .custom-font {
@@ -139,26 +198,94 @@ a:hover {
     font-family: 'Times New Roman', Times, serif;
 }
 
-/* Custom button styles */
-.custom-btn {
-    background-color: #b75050;
-    border: rosybrown;
-    color: white;
-    padding: 10px 20px;
-    position: relative;
-    font-size: 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    
+
+/* Estilo personalizado para o botÃ£o de Login */
+.custom-login-btn {
+    background-color:#edc16f; /* Cor de fundo */
+    color: rgb(255, 255, 255); /* Cor do texto */
+    border: none; /* Remove a borda */
+    padding: 10px 20px; /* EspaÃ§amento interno */
+    font-size: 14px; /* Tamanho da fonte */
+    border-radius: 5px; /* Borda arredondada */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* AnimaÃ§Ã£o */
 }
 
-.custom-btn:hover {
-    background-color: #6189a0; /* Azul mais escuro ao passar o mouse */
+.custom-login-btn:hover {
+    background-color: #ffc2c2; /* Cor de fundo ao passar o mouse */
     transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
 
-.custom-btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5); /* Efeito de foco */
+/* Estilo personalizado para o botÃ£o de Sign-up */
+.custom-signup-btn {
+    background-color: #BF6A61;; /* Cor de fundo */
+    color: rgb(255, 255, 255); 
+    border: none; /* Remove a borda */
+    padding: 10px 20px; /* EspaÃ§amento interno */
+    font-size: 14px; /* Tamanho da fonte */
+    border-radius: 5px; /* Borda arredondada */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* AnimaÃ§Ã£o */
+}
+
+.custom-signup-btn:hover {
+    background-color: #7a7e7f; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+
+.navbar-toggler.custom-toggler {
+    border-color: gold;
+}
+
+.navbar-toggler.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='gold' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+}
+
+
+
+/* Define o contêiner do carrossel */
+.carousel {
+    position: relative;  /* Define a posição como relativa para que elementos filhos possam ser posicionados relativamente a ele */
+    width: 100%;         /* Largura total do contêiner */
+    height: 70vh;        /* Altura do contêiner definida como 80% da altura da viewport */
+    overflow: hidden;    /* Esconde o conteúdo que ultrapassar os limites do contêiner */
+}
+
+/* Define o contêiner interno do carrossel */
+.carousel-inner {
+    width: 100%;         /* Largura total do contêiner interno */
+    height: 100%;        /* Altura total do contêiner interno */
+}
+
+/* Define cada item do carrossel */
+.carousel-item {
+    height: 100%;        /* Cada item ocupa a altura total do contêiner interno */
+}
+
+/* Define as propriedades das imagens dentro dos itens do carrossel */
+.carousel-item img {
+    width: 100%;         /* Largura total da imagem */
+    height: 102%;        /* Altura total da imagem */
+    object-fit: cover;   /* Ajusta a imagem para cobrir o contêiner mantendo a proporção */
+}
+
+@media (max-width: 768px) {
+    .carousel {
+        height: 60vh;    /* Reduz a altura do carrossel em dispositivos móveis */
+    }
+    .carousel-item img {
+        object-fit: contain; /* Ajusta a imagem para conter dentro do contêiner em vez de cobrir */
+    }
+}
+
+/* Adicionar transições suaves para o carrossel */
+.carousel-item {
+    transition: transform 0.5s ease-in-out;  /* Suaviza a transição entre itens */
+}
+
+/* Adicionar estilos para os botões de navegação */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);  /* Fundo semitransparente para melhor visibilidade */
+    border-radius: 50%;                    /* Bordas arredondadas */
+    padding: 10px;                         /* Espaçamento interno */
 }
 
