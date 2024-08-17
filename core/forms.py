@@ -1,19 +1,22 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Login  # Importe seu modelo de usuário personalizado
+from .models import Login  
+from representantes.models import Representante
 
 # Formulário de Registro
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    cnpj = forms.CharField(max_length=14, required=True)
+    cnpj = forms.CharField(max_length=18, required=True)  
+    representante = forms.ModelChoiceField(queryset=Representante.objects.all(),required=False,empty_label="Selecione um representante")
+    cep = forms.CharField(max_length=10, required=False)  
 
     class Meta:
-        model = Login  # Usamos o modelo de usuário personalizado
-        fields = ('email', 'cnpj', 'password1', 'password2')
+        model = Login
+        fields = ('email', 'cnpj', 'password1', 'password2', 'representante', 'cep')
 
     def clean_cnpj(self):
         cnpj = self.cleaned_data.get('cnpj')
-        # Aqui você pode adicionar validação adicional para o CNPJ, se necessário
+        
         return cnpj
 
 # Formulário de Login

@@ -1,106 +1,117 @@
 <!-- templates/seu_app/partials/footer.html -->
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
-
  <style>
-.footer {
-    background: linear-gradient(#ffffff, #ffe0e0);
-    color: #020202;
-    padding: 40px 0;
-    text-align: center;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-around;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.footer-section {
-    flex: 1;
-    margin: 0 20px;
-}
-
-.footer-section h4 {
-    border-bottom: 2px solid #c19191;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-.footer-section ul {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-section ul li {
-    margin-bottom: 10px;
-}
-
-.footer-section ul li a {
-    color: #111212;
-    text-decoration: none;
-}
-
-.footer-section ul li a:hover {
-    text-decoration: underline;
-}
-
-.social-links {
-    display: flex;
-    justify-content: space-around;
-    padding: 0;
-}
-
-.social-links li {
-    margin: 0 10px;
-}
-
-.social-icon {
-    color: #f4a81b;
-    font-size: 24px;
-    text-decoration: none;
-}
-
-.social-icon:hover {
-    color: #ff990a;
-}
-
-.footer-bottom {
-    background-color: #f0f0ee;
-    padding: 20px 0;
-}
-
- </style>
+    .footer {
+        background: linear-gradient(#ffffff, #ffe0e0);
+        color: #020202;
+        padding: 40px 0;
+        text-align: center;
+    }
+    
+    .footer-container {
+        display: flex;
+        justify-content: space-around;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .footer-section {
+        flex: 1;
+        margin: 0 20px;
+    }
+    
+    .footer-section h4 {
+        border-bottom: 2px solid #c19191;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .footer-section ul li {
+        margin-bottom: 10px;
+    }
+    
+    .footer-section ul li a {
+        color: #111212;
+        text-decoration: none;
+    }
+    
+    .footer-section ul li a:hover {
+        text-decoration: underline;
+    }
+    
+    .social-links {
+        display: flex;
+        justify-content: center; /* Alinhamento centralizado dos ícones */
+        padding: 0;
+    }
+    
+    .social-links li {
+        margin: 0 15px; /* Ajuste o espaçamento entre os ícones */
+    }
+    
+    .social-icon {
+        font-size: 24px;
+        text-decoration: none;
+    }
+    
+    /* Cores específicas para cada rede social */
+    .social-icon.facebook {
+        color: #3b5998; /* Facebook */
+    }
+    
+    .social-icon.twitter {
+        color: #1da1f2; /* Twitter */
+    }
+    
+    .social-icon.instagram {
+        color: #e4405f; /* Instagram */
+    }
+    
+    .social-icon.linkedin {
+        color: #0077b5; /* LinkedIn */
+    }
+    
+    /* Efeito de hover */
+    .social-icon:hover {
+        opacity: 0.8;
+    }
+    
+    .footer-bottom {
+        background-color: #f0f0ee;
+        padding: 20px 0;
+    }
+    </style>
+    
 <footer class="footer">
-  <div class="footer-container">
-      <div class="footer-section">
-          <h4>Sobre</h4>
-          <p>ACG é uma empresa dedicada a fornecer produtos de qualidade. Todos os direitos reservados.</p>
-      </div>
-      <div class="footer-section">
-          <h4>Links Úteis</h4>
-          <ul>
-              <li><a href="#">Contate-nos</a></li>
-              <li><a href="#">Política de Privacidade</a></li>
-          </ul>
-      </div>
-      <div class="footer-section">
-          <h4>Redes Sociais</h4>
-          <ul class="social-links">
-              <li><a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a></li>
-              <li><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></li>
-              <li><a href="#" class="social-icon"><i class="fab fa-instagram"></i></a></li>
-              <li><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a></li>
-          </ul>
-      </div>
-  </div>
-  <div class="footer-bottom">
-      <p>&copy; {{ '2024' }} ACG. Todos os direitos reservados.</p>
-  </div>
-</footer>
+    <div class="footer-container">
+        <div class="footer-section">
+            <h4>Sobre</h4>
+            <p>Inova é uma empresa dedicada a fornecer produtos de qualidade. Todos os direitos reservados.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Links</h4>
+            <ul>
+                <li><a href="{% url 'contato' %}">Contate-nos</a></li>
+
+                <li><a href="#">Política de Privacidade</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Redes Sociais</h4>
+            <ul class="social-links">
+                <li><a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; {{ '2024' }} Inova. Todos os direitos reservados.</p>
+    </div>
+  </footer>

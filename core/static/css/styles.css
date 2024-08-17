@@ -24,8 +24,8 @@ h2 {
 
 /* Estilos para barra de navegação */
 .navbar-custom {
-    background: linear-gradient(to right, #AA5E4E rgba(249, 210, 180, 0.8));
-    border-bottom: 2px solid #4d002d;
+    background: linear-gradient(to right, #0b0b0b, rgba(200, 193, 193, 0.8)); 
+   
 }
 
 .nav-link {
@@ -33,7 +33,7 @@ h2 {
 }
 
 .nav-link:hover {
-    color: #f6ad40 !important;
+    color: #494744 !important;
 }
 
 .navbar-brand {
@@ -43,7 +43,7 @@ h2 {
 
 /* Botão todos os produtos de estilo para botões personalizados */
 .custom-btn {
-    background-color: #b75050;
+    background-color: #246a6c;
     border: 1px solid rgb(255, 255, 255);
     color: white;
     padding: 10px 20px;
@@ -261,7 +261,7 @@ a:hover {
 }
 
 .navbar-toggler.custom-toggler {
-    border-color: gold;
+    border-color: rgb(255, 255, 255);
 }
 
 .navbar-toggler.custom-toggler .navbar-toggler-icon {

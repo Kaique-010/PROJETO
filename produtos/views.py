@@ -1,12 +1,11 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView, DetailView
 from django.urls import reverse_lazy
-from .models import Produtos, Grupo
+from .models import Colecao, Produtos, Grupo
 from .forms import ProdutosModelForm, ProdutoFilterForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template.loader import get_template
-from django.shortcuts import render
 
 
 class ProdutosListView(ListView):
@@ -90,21 +89,26 @@ def produtos_list(request):
         'form': ProdutoFilterForm(request.GET),
     })
 
+class GrupoListView(ListView):
+    model = Grupo
+    template_name = 'produtos/grupo_list.html'
+    context_object_name = 'grupos'
+
 class GrupoProdutosView(ListView):
     model = Produtos
     template_name = 'produtos/grupo_produtos.html'
     context_object_name = 'produtos'
 
     def get_queryset(self):
-        grupo_id = self.kwargs.get('pk')
+        grupo_id = self.kwargs.get('grupo_id')
         return Produtos.objects.filter(grupo_id=grupo_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['grupo'] = get_object_or_404(Grupo, pk=self.kwargs.get('pk'))
-        context['grupos'] = Grupo.objects.all()  # Passar a lista de todos os grupos
+        grupo_id = self.kwargs.get('grupo_id')
+        context['grupo'] = get_object_or_404(Grupo, pk=grupo_id)
         return context
-
+    
 def filtrar_produtos(request):
     grupo = request.GET.get('grupo')
     familia = request.GET.get('familia')
@@ -124,7 +128,7 @@ def filtrar_produtos(request):
 
     for produto in produtos:
         if not produto.imagem:
-            produto.imagem_url = 'Sem Imagem'  # Caminho para uma imagem padrão
+            produto.imagem_url = 'Sem Imagem' 
         else:
             produto.imagem_url = produto.imagem.url
 
@@ -133,3 +137,7 @@ def filtrar_produtos(request):
     }
 
     return render(request, 'produtos/produtos_lista_parcial.html', context)
+
+def colecao(request):
+    colecoes = Colecao.objects.all() 
+    return render(request, 'produtos/produtos_list.html', {'colecoes': colecoes})

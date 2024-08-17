@@ -1,3 +1,4 @@
+<!--  Base    -->
 {% load bootstrap4 static %}
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -7,10 +8,55 @@
     {% bootstrap_css %}
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static  'css/styles.css' %}">
+    <link rel="stylesheet" href="{%static  'css/styles.css' %}">
     
 </head>
+<style>
+body {
+    font-family: 'Times New Roman', Times, serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
 
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 60vh; /* Altura do carrossel */
+    overflow: hidden;
+}
+.carousel-inner {
+    width: 100%;
+    height: 100%;
+}
+.carousel-item {
+    height: 100%;
+}
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Preenche o contêiner mantendo a proporção */
+}
+.features-section {
+    padding: 3rem 0;
+    background-color: #f7f7f7;
+}
+.feature {
+    text-align: center;
+    padding: 1rem;
+}
+.feature i {
+    font-size: 2rem;
+    color: #e6b633;
+    margin-bottom: 1rem;
+}
+.footer {
+    background: linear-gradient(#ffffff, #ffe0e0);
+    color: #101010;
+    padding: 2rem 0;
+    text-align: center;
+}
+</style>
 <body>    
 
 {% include 'partials/header.html' %}
@@ -26,9 +72,13 @@
 {% include 'partials/footer.html' %}
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq5tv8P8fEX55Cbsn+EGl5fJYYc5i0OJm2b4QomniwUYoXK5/8" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgYfZbB7TVbP9Y50fuFdS4g5cfsXn5f5/7TqtrV1pI4WxAx3Jb4" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
 {% bootstrap_javascript %}
 </body>
 </html>
+
+<!--  Base    -->

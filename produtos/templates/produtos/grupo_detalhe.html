@@ -1,18 +1,61 @@
-<!-- grupo_detalhe.html -->
+<!-- Detalhe dos produtos por Grupo -->
 
 {% extends 'base.html' %}
 
 {% block content %}
-      {% endfor %}
-  </div>
+<style>
+    .bi-plus {
+        color: coral;
+        font-size: 2.5rem;
+    }
+    .bi-plus:hover {
+        opacity: 0.8;
+        color: rgb(152, 152, 152);
+    }
+</style>
+<div class="container mt-5">
+    <h1 class="text-center">
+        Demonstrativo de Produtos de: {{ grupo.nome }}
+        <a href="{% url 'produtos_list' %}" title="Voltar Para Outras Coleções">
+            <i class="bi bi-plus fs-4"></i>
+        </a>
+    </h1>
+
+    <div class="row">
+        {% for produto in grupo.produtos_set.all %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card h-100">
+                {% if produto.imagem and produto.imagem.url %}
+                <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}">
+                {% else %}
+                <img src="/path/to/default/image.jpg" class="card-img-top" alt="Sem Imagem">
+                {% endif %}
+
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'produto_detalhe' produto.pk %}" class="text-decoration-none">{{ produto.nome }}</a>
+                    </h5>
+                    <p class="card-text">Descrição: {{ produto.descricao }}</p>
+                    <p class="card-text">Família: {{ produto.familia }}</p>
+                    <p class="card-text">Peso: {{ produto.peso }} gr.</p>
+                    <p class="card-text"><strong>Grupo:</strong> {{ produto.grupo }}</p>
+                    
+                    <form action="{% url 'carrinho:adicionar' produto.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="quantidade">Quantidade</label>
+                            <input type="number" name="quantidade" class="form-control" id="quantidade" value="1" min="1">
+                        </div>
+                        <button type="submit" class="btn btn-custom">Adicionar ao Carrinho</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">Nenhum produto encontrado neste grupo.</p>
+        </div>
+        {% endfor %}
+    </div>
 </div>
-  <h1>Detalhes do Grupo - {{ grupo.nome }}</h1>
-  
-  <ul>
-    {% for produto in grupo.produtos_set.all %}
-      <li>{{ produto.nome }} - {{ produto.descricao }}  - {{ produto.peso }} </li>
-    {% empty %}
-      <li>Nenhum produto encontrado neste grupo.</li>
-    {% endfor %}
-  </ul>
 {% endblock %}

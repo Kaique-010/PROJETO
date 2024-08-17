@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Produtos do Grupo: {{ grupo.nome }}</h1>
+    <div class="row">
+        {% for produto in produtos %}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card h-100">
+                {% if produto.imagem and produto.imagem.url %}
+                <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}">
+                {% else %}
+                <img src="/path/to/default/image.jpg" class="card-img-top" alt="Sem Imagem">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'produto_detalhe' produto.pk %}" class="text-decoration-none">{{ produto.nome }}</a>
+                    </h5>
+                    <p class="card-text">{{ produto.descricao }}</p>
+                    <p class="card-text">Família: {{ produto.familia }}</p>
+                    <p class="card-text">Peso: {{ produto.peso }} gr.</p>
+                    <p class="card-text"><strong>Grupo:</strong> {{ produto.grupo }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

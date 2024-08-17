@@ -30,7 +30,7 @@ class ProdutosAdmin(admin.ModelAdmin):
 
 # Customizando a administração do modelo Grupo
 class GrupoAdmin(admin.ModelAdmin):
-    list_display = ('nome',)
+    list_display = ('id','nome', 'descricao','imagem_tag')
     search_fields = ('nome',)
 
 

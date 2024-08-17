@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from .validator import validate_cnpj
+from representantes.models import Representante
 
 class Base(models.Model):
     criado = models.DateField('Criado em', auto_now_add=True)
@@ -11,13 +12,13 @@ class Base(models.Model):
         abstract = True
 
 class LoginManager(BaseUserManager):
-    def create_user(self, email, cnpj, password=None):
+    def create_user(self, email, cnpj, password=None, representante=None, cep=None):
         if not email:
             raise ValueError('O usuário precisa de um email')
-        # CNPJ pode ser None para superusuários
+   
         if cnpj is not None and not validate_cnpj(cnpj):
             raise ValueError('O usuário precisa de um CNPJ válido')
-        user = self.model(email=self.normalize_email(email), cnpj=cnpj)
+        user = self.model(email=self.normalize_email(email), cnpj=cnpj, representante=Representante, cep=cep)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -31,6 +32,8 @@ class LoginManager(BaseUserManager):
 class Login(AbstractBaseUser, Base):
     email = models.EmailField(unique=True)
     cnpj = models.CharField(max_length=18, validators=[validate_cnpj], blank=True, null=True)
+    representante = models.ForeignKey(Representante, on_delete=models.SET_NULL, null=True, blank=True)
+    cep = models.CharField(max_length=10, blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 

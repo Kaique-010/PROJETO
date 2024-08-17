@@ -207,8 +207,7 @@ def limpar_carrinho(request):
 
 @login_required
 def historico_compras(request):
-    historico = Compra.objects.filter(usuario=request.user).prefetch_related('itens__produto').order_by('-criado')
-     # Configura a paginação, 10 compras por página
+    historico = Compra.objects.filter(usuario=request.user).prefetch_related('itens__produto').order_by('id')
     paginator = Paginator(historico, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -219,7 +218,8 @@ def historico_compras(request):
             'id': compra.id,
             'criado_em': compra.data_compra,
             'peso_total': compra.calcular_peso_total(),
-            'formasrecebimento': compra.formasrecebimento,  # Acesse o atributo diretamente
+            'representante': compra.representante,
+            'formasrecebimento': compra.formasrecebimento,
             'itens': compra.itens.all()
         })
     

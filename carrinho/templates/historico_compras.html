@@ -1,6 +1,7 @@
 {% load bootstrap4 static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,12 +9,13 @@
     {% bootstrap_css %}
     <style>
         body {
-            background: linear-gradient(white, #B75050);
+            background: linear-gradient(white, #edc5c5);
             font-family: 'Times New Roman', Times, serif;
             font-size: 15px;
             padding-inline-start: 5%;
             padding-bottom: 35%;
         }
+
         .container {
             margin-top: 50px;
             background: white;
@@ -21,19 +23,23 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
             color: #17A2B8;
             text-align: center;
         }
+
         .btn-custom {
             background-color: #B75050;
             color: white;
             margin-top: 20px;
         }
+
         .compra-list {
             list-style-type: none;
             padding: 0;
         }
+
         .compra-list li {
             position: relative;
             margin-bottom: 10px;
@@ -41,42 +47,59 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+
         .btn-detalhes {
             position: absolute;
             right: 10px;
             top: 50%;
             transform: translateY(-50%);
         }
+
         .compra-details {
             list-style-type: none;
             padding-left: 20px;
         }
+
         .text-center {
             text-align: center;
         }
     </style>
 </head>
+
 <body>
     <div class="container mt-5">
         <h1>Histórico de Compras</h1>
         {% if historico %}
         <ul class="compra-list">
             {% for compra in historico %}
-                <li>
-                    Compra: {{ compra.id }}, Data: {{ compra.criado_em }}, Peso Total: {{ compra.peso_total }} gramas,
-                    <button type="button" class="btn btn-info btn-sm btn-detalhes" onclick="mostrarDetalhes({{ compra.id }})">Ver Detalhes</button>
-                    <div id="detalhes-compra-{{ compra.id }}" style="display:none;">
-                        <ul class="compra-details">
-                            {% for item in compra.itens.all %}
-                                <li>Produto: {{ item.produto.nome }}, Quantidade: {{ item.quantidade }}, Peso: {{ item.produto.peso }} gramas</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </li>
+            <li>
+                <strong>Compra:</strong> {{ compra.id }}<br>
+                <strong>Data:</strong> {{ compra.criado_em }}<br>
+                <strong>Peso Total:</strong> {{ compra.peso_total }} gramas<br>
+                <strong>Representante:</strong> {{ compra.representante }}<br>
+                <button type="button" class="btn btn-info btn-sm btn-detalhes"
+                    onclick="mostrarDetalhes({{ compra.id }})">Ver Detalhes</button>
+                <div id="detalhes-compra-{{ compra.id }}" style="display:none;">
+                    <ul class="compra-details">
+                        {% for item in compra.itens.all %}<br>
+                        <center>Data Pedido: {{ compra.criado_em}}<br></center>
+                        <br>
+                        <li><strong> Produtos:</strong> {{ item.produto.nome }}<br>
+                            Quantidade: {{ item.quantidade }}<br>
+                            Peso: {{ item.produto.peso }} gramas,<br> Peso Total:{{ compra.peso_total }} <br>
+                            Representante: {{ compra.representante}}<br>
+                            Recebimento: {{ compra.formasrecebimento}}<br>
+
+
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
             {% endfor %}
         </ul>
         {% else %}
-            <p class="text-center">Você não tem compras finalizadas.</p>
+        <p class="text-center">Você não tem compras finalizadas.</p>
         {% endif %}
         <div class="text-center">
             <a href="{% url 'produtos_list' %}" class="btn btn-custom mt-3">Voltar para Produtos</a>
@@ -103,12 +126,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    function mostrarDetalhes(compraId) {
-        var detalhes = document.getElementById('detalhes-compra-' + compraId).innerHTML;
-        document.getElementById('compraDetalhes').innerHTML = detalhes;
-        var myModal = new bootstrap.Modal(document.getElementById('compraModal'));
-        myModal.show();
-    }
+        function mostrarDetalhes(compraId) {
+            var detalhes = document.getElementById('detalhes-compra-' + compraId).innerHTML;
+            document.getElementById('compraDetalhes').innerHTML = detalhes;
+            var myModal = new bootstrap.Modal(document.getElementById('compraModal'));
+            myModal.show();
+        }
     </script>
 </body>
+
 </html>

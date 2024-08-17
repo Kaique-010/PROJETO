@@ -1,0 +1,272 @@
+
+/* Define o estilo do body */
+body {
+    
+    font-family: sans-serif;
+    color: #343a40; /* Cor principal do texto */
+    line-height: 1.6; /* Espaçamento entre linhas melhorado */
+    margin: 0; /* Remove margens padrão */
+    padding: 0; /* Remove padding padrão */
+}
+
+/* Estilos para cabeçalhos */
+h1 {
+    font-size: 24px;
+    color: #333;
+    margin-top: 5px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #555;
+    margin-top: 15px;
+}
+
+
+/* Estilos para barra de navegação */
+.navbar-custom {
+    background: linear-gradient(to right, #ffc0c0, rgba(139, 132, 132, 0.8)); 
+    border-bottom: 2px solid #4d002d;
+}
+
+.nav-link {
+    color: #030303 !important;
+}
+
+.nav-link:hover {
+    color: #494744 !important;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 24px;
+}
+
+/* Botão todos os produtos de estilo para botões personalizados */
+.custom-btn {
+    background-color: #b75050;
+    border: 1px solid rgb(255, 255, 255);
+    color: white;
+    padding: 10px 20px;
+    position: relative;
+    font-size: 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-btn:hover {
+    background-color: #6189a0;
+    transform: scale(1.05);
+}
+
+.custom-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+
+
+
+/* Estilos do carrossel */
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transform: scaleX(-1); /* Espelha a imagem horizontalmente */
+}
+
+.carousel {
+    width: 420px; /* Largura máxima do carrossel */
+    margin: 0 auto; /* Centraliza o carrossel */
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+    border: 2px solid #ddd; /* Adiciona borda */
+    height: 70vh;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    transform: scaleX(-1); /* Espelha os ícones de navegação */
+}
+
+.carousel-indicators li {
+    background-color: #000; /* Cor dos indicadores */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.carousel-indicators .active {
+    background-color: #ff6347; /* Cor dos indicadores ativos */
+}
+
+
+/* Estilo do texto principal */
+p {
+    font-size: 0.70rem;
+    line-height: 1.0;
+    margin-bottom: 20px;
+}
+
+/* Estilo para links */
+a {
+    color: #060606; /* Cor padrão para links */
+    text-decoration: none; /* Remove sublinhado padrão */
+}
+
+a:hover {
+    text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+}
+
+
+
+
+/* Estilo do card */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(255, 226, 226, 0.838);
+    width: 250px; /* Reduzi o tamanho do card */
+    height: 300px; /* Reduzi o tamanho do card */
+    background-color: #fff;
+    color: #333;
+    padding: 5px;
+    margin: 5px;
+    margin-bottom: 0px;
+}
+
+/* Container flexível para os cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Centraliza os cards */
+    gap: 2px; /* Espaçamento entre os cards */
+    padding: 10px; /* Espaçamento interno */
+    margin-bottom: 0px;
+    margin: 0px;
+}
+
+
+
+/* Efeito de hover no card */
+.card:hover {
+    transform: translateY(-10px);
+    transform: scale(1.05); /* Aumenta um pouco o tamanho no hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    background-color: #e9ecef; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo do título do card */
+.card-title {
+    font-family: 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 1.2rem; /* Reduzi o tamanho do título */
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #000000; /* Cor do título */
+}
+
+/* Estilo da imagem do card */
+.card-img-top {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+/* Efeito de zoom na imagem ao passar o mouse */
+.card:hover .card-img-top {
+    transform: scale(1.1);
+}
+
+/* Estilo do corpo do card */
+.card-body {
+    padding: 2px;
+    text-align: center;
+}
+
+
+/* Estilo do texto do card */
+.card-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 0.8rem;
+    color: #555;
+    margin-bottom: 10px; /* Ajustei o espaçamento inferior */
+}
+
+/* Animação de hover */
+.card:hover {
+    animation: hoverAnimation 0.3s forwards;
+}
+
+
+@keyframes hoverAnimation {
+    from {
+        transform: scale(1.00);
+    }
+    to {
+        transform: scale(1.15);
+    }}
+
+
+
+.form-inline .form-control {
+    background-color: #ffecec; /* Cor de fundo do campo de busca */
+    color: #000000; /* Cor do texto do campo de busca */
+    border: 1px solid #000000; /* Borda do campo de busca */
+}
+
+.form-inline .btn-outline-light {
+    border-color: #c4a1c2; /* Borda do botão de busca */
+    color: #000000; /* Cor do texto do botão de busca */
+}
+
+/* Estilo da fonte customizada */
+.custom-font {
+    font-size: 5px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+/* Estilo personalizado para o botão de Login */
+.custom-login-btn {
+    background-color:#edc16f; /* Cor de fundo */
+    color: rgb(255, 255, 255); /* Cor do texto */
+    border: none; /* Remove a borda */
+    padding: 10px 20px; /* Espaçamento interno */
+    font-size: 14px; /* Tamanho da fonte */
+    border-radius: 5px; /* Borda arredondada */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Animação */
+}
+
+.custom-login-btn:hover {
+    background-color: #ffc2c2; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+
+/* Estilo personalizado para o botão de Sign-up */
+.custom-signup-btn {
+    background-color: #BF6A61;; /* Cor de fundo */
+    color: rgb(255, 255, 255); 
+    border: none; /* Remove a borda */
+    padding: 10px 20px; /* Espaçamento interno */
+    font-size: 14px; /* Tamanho da fonte */
+    border-radius: 5px; /* Borda arredondada */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Animação */
+}
+
+.custom-signup-btn:hover {
+    background-color: #7a7e7f; /* Cor de fundo ao passar o mouse */
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+}
+
+.navbar-toggler.custom-toggler {
+    border-color: rgb(255, 255, 255);
+}
+
+.navbar-toggler.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'><path stroke='gold' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/></svg>");
+}
+
+

@@ -115,7 +115,7 @@ STATIC_URL = '/static/'
 MEDIA_URL = 'media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'produtos/static'),  # Adicione este caminho se ainda não estiver lá
+    os.path.join(BASE_DIR,),  # Adicione este caminho se ainda não estiver lá
 ]
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -128,6 +128,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'leokaique7@gmail.com'
-EMAIL_HOST_PASSWORD = 'jthdrawdbdulidcz'  # Certifique-se de usar sua senha de aplicativo do Gmail ou a senha regular
+EMAIL_HOST_PASSWORD = 'jthdrawdbdulidcz' 
 DEFAULT_FROM_EMAIL = 'leokaique7@gmail.com'
-

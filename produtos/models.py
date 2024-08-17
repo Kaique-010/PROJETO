@@ -38,9 +38,24 @@ class Colecao(models.Model):
 # Modelo para Grupo de Produtos
 class Grupo(models.Model):
     nome = models.CharField('Nome', max_length=50)  # Nome do grupo
+    imagem = StdImageField('Imagem', upload_to='produtos', variations={'thumbnail': (90, 90)}, blank=True, null=True)
+    descricao = models.TextField('Descrição', max_length=100,blank=True, null=True)
 
     def __str__(self):
         return self.nome  # Representação em string do modelo
+    
+    def imagem_tag(self):
+        try:
+            return mark_safe(f'<img src="{self.imagem.url}" width="80" height="80" />')
+        except AttributeError:
+            return "No Image"
+
+    imagem_tag.short_description = 'Imagem'
+
+    def save(self, *args, **kwargs):
+        if not self.imagem:
+            self.imagem = DEFAULT_IMAGE_PATH  # Define a imagem padrão
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Grupo'  # Nome singular no admin
